@@ -1,5 +1,15 @@
 [
   {
+    "Judul": "Letters of a Javanese Princess",
+    "Pengarang": "Raden Ajeng Kartini",
+    "Klasifikasi": "800",
+    "Link": "https://online.fliphtml5.com/PerpustakaanSMAK6PENABUR/wjik/#p=1",
+    "Tahun": "1911",
+    "Bahasa": "Inggris",
+    "Halaman": "200+",
+    "Deskripsi": "Kumpulan surat-surat R.A. Kartini tentang emansipasi wanita"
+  },
+  {
     "Judul": "Tarzan of the Apes",
     "Pengarang": "Edgard Rice Burroughs",
     "Klasifikasi": "800",
@@ -8,15 +18,5 @@
     "Bahasa": "Inggris",
     "Halaman": "200+",
     "Deskripsi": "Cerita Klasik tentang Tarzan"
-  },
-  {
-    "Judul": "Buku Baru Anda",
-    "Pengarang": "Nama Penulis",
-    "Klasifikasi": "500",
-    "Link": "https://online.fliphtml5.com/...",
-    "Tahun": "2024",
-    "Bahasa": "Indonesia",
-    "Halaman": "150",
-    "Deskripsi": "Deskripsi buku"
   }
 ]
