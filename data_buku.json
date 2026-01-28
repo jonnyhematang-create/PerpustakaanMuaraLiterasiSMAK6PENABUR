@@ -1,3 +1,22 @@
-="Judul"	="Pengarang"	="Klasifikasi"	="Link"
-="Letters of Javanese Princess"	="Raden Ajeng Kartini"	="800"	="https://online.fliphtml5.com/PerpustakaanSMAK6PENABUR/wjik/"
-="Tarzan of the Apes"	="Edgard Rice Burroughs"	="800"	="https://online.fliphtml5.com/PerpustakaanSMAK6PENABUR/ojpu/"
+[
+  {
+    "Judul": "Tarzan of the Apes",
+    "Pengarang": "Edgard Rice Burroughs",
+    "Klasifikasi": "800",
+    "Link": "https://online.fliphtml5.com/PerpustakaanSMAK6PENABUR/ojpu/",
+    "Tahun": "1911",
+    "Bahasa": "Inggris",
+    "Halaman": "200+",
+    "Deskripsi": "Cerita Klasik tentang Tarzan"
+  },
+  {
+    "Judul": "Buku Baru Anda",
+    "Pengarang": "Nama Penulis",
+    "Klasifikasi": "500",
+    "Link": "https://online.fliphtml5.com/...",
+    "Tahun": "2024",
+    "Bahasa": "Indonesia",
+    "Halaman": "150",
+    "Deskripsi": "Deskripsi buku"
+  }
+]
