@@ -142,11 +142,11 @@
    </header><!-- Main Content -->
    <main class="max-w-7xl mx-auto px-4 py-10"><!-- Stats Bar -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-     <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><span class="block text-2xl font-bold text-blue-600">1</span> <span class="text-slate-500 text-sm">Total Buku</span>
+     <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><span id="total-books" class="block text-2xl font-bold text-blue-600">0</span> <span class="text-slate-500 text-sm">Total Buku</span>
      </div>
      <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><span class="block text-2xl font-bold text-emerald-600">10</span> <span class="text-slate-500 text-sm">Kategori</span>
      </div>
-     <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><span class="block text-2xl font-bold text-amber-600">1</span> <span class="text-slate-500 text-sm">E-Book Tersedia</span>
+     <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><span id="ebook-count" class="block text-2xl font-bold text-amber-600">0</span> <span class="text-slate-500 text-sm">E-Book Tersedia</span>
      </div>
      <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 text-center"><span class="block text-2xl font-bold text-purple-600">∞</span> <span class="text-slate-500 text-sm">Akses 24/7</span>
      </div>
@@ -320,6 +320,12 @@
         "500": "🔬", "600": "⚙️", "700": "🎨", "800": "📖", "900": "🗺️"
       };
       return icons[category] || "📚";
+    }
+    
+    // Update stats display
+    function updateStats() {
+      document.getElementById('total-books').textContent = books.length;
+      document.getElementById('ebook-count').textContent = books.length;
     }
     
     // Initialize Dewey Grid
@@ -593,6 +599,9 @@
       // Load books from JSON file
       await loadBooks();
       
+      // Update stats
+      updateStats();
+      
       // Initialize UI
       initDeweyGrid();
       renderBooks(books);
@@ -608,5 +617,5 @@
     
     init();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4f058b6203c649',t:'MTc2OTU4NzkxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4f269a4393afeb',t:'MTc2OTU4OTI2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
