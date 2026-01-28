@@ -239,29 +239,88 @@
       { code: "600", name: "Teknologi", color: "#22c55e", icon: "⚙️", desc: "Kedokteran, Teknik, Pertanian" },
       { code: "700", name: "Seni & Rekreasi", color: "#14b8a6", icon: "🎨", desc: "Musik, Olahraga, Arsitektur" },
       { code: "800", name: "Sastra", color: "#0ea5e9", icon: "📚", desc: "Puisi, Drama, Prosa" },
-      { code: "900", name: "Sejarah & Geografi", color: "#6366f1", icon: "🗺️", desc: "Biografi, Sejarah Dunia" }
+      { code: "900", name: "Sejarah & Geografi", color: "#6366f1", icon: "���️", desc: "Biografi, Sejarah Dunia" }
     ];
     
-    // Book Collection Data
-    const books = [
-      {
-        id: 1,
-        title: "Letters of a Javanese Princess",
-        author: "Raden Ajeng Kartini",
-        category: "800",
-        categoryName: "Sastra",
-        year: "1911",
-        description: "Kumpulan surat-surat R.A. Kartini yang mengungkapkan pemikiran dan perjuangannya untuk emansipasi wanita Indonesia. Karya sastra epistolari yang menjadi inspirasi bagi gerakan perempuan di Indonesia.",
-        cover: "📖",
-        link: "https://online.fliphtml5.com/PerpustakaanSMAK6PENABUR/wjik/#p=1",
-        language: "Inggris",
-        pages: "200+",
-        tags: ["Feminisme", "Sejarah", "Indonesia", "Epistolari"]
-      }
-    ];
-    
-    let filteredBooks = [...books];
+    // Book Collection Data (will be loaded from JSON)
+    let books = [];
+    let filteredBooks = [];
     let selectedCategory = null;
+    
+    // Load books from JSON file
+    async function loadBooks() {
+      try {
+        const response = await fetch('data_buku.json');
+        if (!response.ok) {
+          throw new Error('Gagal memuat data buku');
+        }
+        const data = await response.json();
+        
+        // Transform JSON data to match our format
+        books = data.map((book, index) => {
+          const category = book.Klasifikasi || "000";
+          const categoryData = deweyCategories.find(c => c.code === category);
+          
+          // Generate tags from title and author
+          const tags = [];
+          if (book.Judul) {
+            const titleWords = book.Judul.split(' ').filter(w => w.length > 4);
+            tags.push(...titleWords.slice(0, 2));
+          }
+          if (categoryData) {
+            tags.push(categoryData.name);
+          }
+          
+          return {
+            id: index + 1,
+            title: book.Judul || "Tanpa Judul",
+            author: book.Pengarang || "Anonim",
+            category: category,
+            categoryName: categoryData ? categoryData.name : "Karya Umum",
+            year: book.Tahun || "-",
+            description: book.Deskripsi || "Buku digital tersedia untuk dibaca online.",
+            cover: getCoverIcon(category),
+            link: book.Link || "#",
+            language: book.Bahasa || "Indonesia",
+            pages: book.Halaman || "-",
+            tags: tags.slice(0, 4)
+          };
+        });
+        
+        filteredBooks = [...books];
+        return true;
+      } catch (error) {
+        console.error('Error loading books:', error);
+        // Fallback to sample data
+        books = [
+          {
+            id: 1,
+            title: "Letters of a Javanese Princess",
+            author: "Raden Ajeng Kartini",
+            category: "800",
+            categoryName: "Sastra",
+            year: "1911",
+            description: "Kumpulan surat-surat R.A. Kartini yang mengungkapkan pemikiran dan perjuangannya untuk emansipasi wanita Indonesia.",
+            cover: "📖",
+            link: "https://online.fliphtml5.com/PerpustakaanSMAK6PENABUR/wjik/#p=1",
+            language: "Inggris",
+            pages: "200+",
+            tags: ["Feminisme", "Sejarah", "Indonesia", "Epistolari"]
+          }
+        ];
+        filteredBooks = [...books];
+        return false;
+      }
+    }
+    
+    // Get cover icon based on category
+    function getCoverIcon(category) {
+      const icons = {
+        "000": "💻", "100": "🧠", "200": "🕊️", "300": "👥", "400": "💬",
+        "500": "🔬", "600": "⚙️", "700": "🎨", "800": "📖", "900": "🗺️"
+      };
+      return icons[category] || "📚";
+    }
     
     // Initialize Dewey Grid
     function initDeweyGrid() {
@@ -531,6 +590,9 @@
         });
       }
       
+      // Load books from JSON file
+      await loadBooks();
+      
       // Initialize UI
       initDeweyGrid();
       renderBooks(books);
@@ -546,5 +608,5 @@
     
     init();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4eabbc1567b5ba',t:'MTc2OTU4NDIzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4f058b6203c649',t:'MTc2OTU4NzkxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
